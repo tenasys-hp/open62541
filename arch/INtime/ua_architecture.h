@@ -11,6 +11,10 @@
 #define __C99__
 #endif
 
+// INtime does not support alloca
+// That will override the one in the generic header.
+#define UA_STACKARRAY(TYPE, NAME, SIZE) TYPE NAME[SIZE]
+
 #include <open62541/architecture_definitions.h>
 
 #include <stdio.h>
