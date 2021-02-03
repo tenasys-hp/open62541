@@ -340,7 +340,7 @@ cleanup:
 UA_DeleteSubscriptionsResponse
 UA_Client_Subscriptions_delete(UA_Client *client,
                                const UA_DeleteSubscriptionsRequest request) {
-    UA_STACKARRAY(UA_Client_Subscription *, subs, request.subscriptionIdsSize);
+    UA_Client_Subscription **subs = (UA_Client_Subscription **)UA_malloc(sizeof(void *) * request.subscriptionIdsSize);
     memset(subs, 0, sizeof(void *) * request.subscriptionIdsSize);
 
     CustomCallback cc;
@@ -546,7 +546,7 @@ __UA_Client_MonitoredItems_create(UA_Client *client,
     }
 
     size_t itemsToCreateSize = request->itemsToCreateSize;
-    UA_STACKARRAY(UA_Client_MonitoredItem *, mis, itemsToCreateSize);
+    UA_Client_MonitoredItem **mis = (UA_Client_MonitoredItem **)UA_malloc(sizeof(UA_Client_MonitoredItem *) * itemsToCreateSize);
     memset(mis, 0, sizeof(void *) * itemsToCreateSize);
 
     MonitoredItems_CreateData data;
